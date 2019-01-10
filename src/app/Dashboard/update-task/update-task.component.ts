@@ -1,8 +1,8 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { TaskInformation } from '../../Modules/task-information';
 import { SharedService } from 'src/app/Services/shared.service';
-import {FormsModule, NgForm} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
+import { FormsModule, NgForm } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 @NgModule({
@@ -16,9 +16,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UpdateTaskComponent implements OnInit {
   public updateResult: any;
-  public TaskID: number;
-  public Task1: string;
-  public ParentId: number;
+  public TaskId: number;
+  public TaskDescription: string;
+  public ParentID: number;
   public StartDate: string;
   public EndDate: string;
   public Priority: number;
@@ -31,34 +31,37 @@ export class UpdateTaskComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('taskid');
     this._service.GetTask(parseInt(id)).subscribe(data => {
-    this.TaskID = data.TaskID;
-    this.Task1 = data.TaskDesciption;
-    this.Priority = data.Priority;
-   this.StartDate = data.StartDate;
-    this.EndDate = data.EndDate;
-    this.ParentId = data.ParentId; });
-   }
+      this.TaskId = data.TaskId;
+      this.TaskDescription = data.TaskDescription;
+      this.Priority = data.Priority;
+      this.StartDate = data.StartDate;
+      this.EndDate = data.EndDate;
+      this.ParentID = data.ParentID;
+    });
+  }
 
   ngOnInit() {
   }
 
   UpdateTask(): void {
-  const Taskdetails: TaskInformation = {TaskID: this.TaskID,
-  ParentId: this.ParentId,
-  TaskDesciption: this.Task1,
-  StartDate: this.StartDate,
-  EndDate: this.EndDate,
-  Priority: this.Priority,
-  IsTaskCompleted: false};
+    const Taskdetails: TaskInformation = {
+      TaskId: this.TaskId,
+      ParentID: this.ParentID,
+      TaskDescription: this.TaskDescription,
+      StartDate: this.StartDate,
+      EndDate: this.EndDate,
+      Priority: this.Priority,
+      IsTaskCompleted: 0
+    };
 
-if (Taskdetails.TaskDesciption == undefined || Taskdetails.ParentId == undefined || Taskdetails.StartDate == undefined || Taskdetails.EndDate == undefined) {
-  this.IsformValid = false;
-} else {
-  this.IsformValid = true;
-this._service.UpdateTask(Taskdetails.TaskID, Taskdetails).subscribe(data => this.updateResult = data);
-this.IsUpdatedSuccessFully = true;
+    if (Taskdetails.TaskDescription == undefined || Taskdetails.StartDate == undefined || Taskdetails.EndDate == undefined) {
+      this.IsformValid = false;
+    } else {
+      this.IsformValid = true;
+      this._service.UpdateTask(Taskdetails.TaskId, Taskdetails).subscribe(data => this.updateResult = data);
+      this.IsUpdatedSuccessFully = true;
 
-}
+    }
 
-}
+  }
 }

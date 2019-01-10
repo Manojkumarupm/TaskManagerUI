@@ -33,15 +33,15 @@ export class AddTaskComponent implements OnInit {
   }
 
   AddNewTaskInformation(form: NgForm): void {
-  const Taskdetails: TaskInformation = {TaskID: 0,
-  ParentId: this.ParentId,
-  TaskDesciption: this.Task1,
+  const Taskdetails: TaskInformation = {TaskId: 0,
+  ParentID: this.ParentId,
+  TaskDescription: this.Task1,
   StartDate: this.StartDate,
   EndDate: this.EndDate,
   Priority: this.Priority,
-  IsTaskCompleted: false};
+  IsTaskCompleted: 0};
 
-if (Taskdetails.TaskDesciption == undefined || Taskdetails.ParentId == undefined || Taskdetails.StartDate == undefined || Taskdetails.EndDate == undefined) {
+if (Taskdetails.TaskDescription == undefined || Taskdetails.ParentID == undefined || Taskdetails.StartDate == undefined || Taskdetails.EndDate == undefined) {
   this.IsformValid = false;
 } else {
   this.IsformValid = true;

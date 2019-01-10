@@ -11,7 +11,7 @@ import { TaskInformation } from '../Modules/task-information';
   providedIn: 'root'
 })
 export class SharedService {
-private _ApiUrl = '';
+private _ApiUrl = 'http://localhost/Tasks/api/Task';
   constructor(private _http: HttpClient) {
 
    }
@@ -21,7 +21,7 @@ private _ApiUrl = '';
 
   }
   GetTask(TaskId: number): Observable<TaskInformation> {
-    return  this._http.get<TaskInformation>(this._ApiUrl + '/' + TaskId).pipe(map(x => x));
+    return  this._http.get<TaskInformation>(this._ApiUrl + '?TaskId=' + TaskId).pipe(map(x => x));
 
   }
   AddNewTask(task: TaskInformation): Observable<any> {

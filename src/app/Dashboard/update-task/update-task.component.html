@@ -1,10 +1,23 @@
 
+<hr>
+<div class="row">
+  <div class="col-xl-12">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <h4><a routerLink="/add-task" class="text-secondary">Add Task</a></h4>
+      </li>
+      <li class="nav-item" style="padding-left:20px">
+        <h4><a routerLink="/view-task" class="text-secondary">View Task</a></h4>
+      </li>
+    </ul>
+  </div>
+</div>
 <h3 class="text-warning">Update Task</h3>
 <hr>
 <h6 class="alert alert-danger" *ngIf="!IsformValid">All the below fields are mandatory..!</h6>
   <h6 class="alert alert-success" *ngIf="IsUpdatedSuccessFully">Task updated successfully...</h6>
  
-<table class="table table-striped">
+<table class="table table-striped" style="background-color:lightcyan;">
     <tbody>
        <tr>
           <td colspan="1">
@@ -14,14 +27,14 @@
                            <label class="col-md-4 control-label">Task Id:</label>
                            <div class="col-md-8 inputGroupContainer">
                               
-                              <div class="input-group"><input id="TaskID" [(ngModel)]="TaskID"  name="TaskID" readonly class="form-control"  type="text"></div>
+                              <div class="input-group"><input id="TaskId" [(ngModel)]="TaskId"  name="TaskId" readonly class="form-control"  type="text"></div>
                            </div>
                         </div>
                    <div class="form-group">
                       <label class="col-md-4 control-label">Task:</label>
                       <div class="col-md-8 inputGroupContainer">
                          
-                         <div class="input-group"><input id="TaskName" [(ngModel)]="Task1"  name="TaskName" placeholder="Task Details" class="form-control" required="true" type="text"></div>
+                         <div class="input-group"><input id="TaskDescription" [(ngModel)]="TaskDescription"  name="TaskDescription" placeholder="Task Details" class="form-control" required="true" type="text"></div>
                       </div>
                    </div>
                    <div class="form-group">
@@ -35,7 +48,7 @@
                    <div class="form-group">
                       <label class="col-md-4 control-label">Parent Task Id:</label>
                       <div class="col-md-8 inputGroupContainer">
-                        <div class="input-group"><input id="ParentTask" [(ngModel)]="ParentId"  #ParentTask name="ParentTask" placeholder="Parent Task Id" class="form-control" required="true"  type="number"></div>
+                        <div class="input-group"><input id="ParentTask" [(ngModel)]="ParentID"  #ParentTask name="ParentTask" placeholder="Parent Task Id" class="form-control" required="true"  type="number"></div>
                       </div>
                    </div>
                    <div class="form-group">

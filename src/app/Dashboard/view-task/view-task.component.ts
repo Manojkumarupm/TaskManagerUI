@@ -10,9 +10,9 @@ import { map, filter } from 'rxjs/operators';
 })
 export class ViewTaskComponent implements OnInit {
 
-  list: TaskInformation[];
+  tasks: TaskInformation[];
   constructor(private _service: SharedService, public datepipe: DatePipe) {
-    this._service.GetAllTask().subscribe(data => this.list = data);
+    this._service.GetAllTask().subscribe(data => this.tasks = data);
 
    }
 
@@ -24,13 +24,14 @@ export class ViewTaskComponent implements OnInit {
     let DeleteResult: any;
     this._service.DeleteTask(TaskId).subscribe(data => DeleteResult = data);
 
-    this._service.GetAllTask().subscribe(data => this.list = data);
+    this._service.GetAllTask().subscribe(data => this.tasks = data);
     alert('Task has been deleted successfully..!');
   }
   CompleteTaskFlagchange(Item: TaskInformation): void {
     let updateResult: any;
+    Item.IsTaskCompleted=1;
     this._service.CompleteTaskFlagUpdate(Item).subscribe(data => updateResult = data);
-    this._service.GetAllTask().subscribe(data => this.list = data);
+    this._service.GetAllTask().subscribe(data => this.tasks = data);
     alert('Task has been marked as End..!');
   }
   TrackTask(index: number, item: any) {
@@ -40,42 +41,42 @@ export class ViewTaskComponent implements OnInit {
   }
   TaskFilter(taskdetail: string): void {
     if (taskdetail != undefined && taskdetail.length != 0) {
-  this._service.GetAllTask().subscribe(data => this.list = data.filter(item => item.TaskDesciption.toUpperCase() === taskdetail.toUpperCase()));
+  this._service.GetAllTask().subscribe(data => this.tasks = data.filter(item => item.TaskDescription.toUpperCase() === taskdetail.toUpperCase()));
     } else {
-      this._service.GetAllTask().subscribe(data => this.list = data);
+      this._service.GetAllTask().subscribe(data => this.tasks = data);
     }
 
   }
   ParentTaskFilter(Parenttaskdetail: number): void {
     if (Parenttaskdetail != undefined && Parenttaskdetail != 0) {
-  this._service.GetAllTask().subscribe(data => this.list = data.filter(item => item.ParentId == Parenttaskdetail));
+  this._service.GetAllTask().subscribe(data => this.tasks = data.filter(item => item.ParentID == Parenttaskdetail));
     } else {
-      this._service.GetAllTask().subscribe(data => this.list = data);
+      this._service.GetAllTask().subscribe(data => this.tasks = data);
     }
 
   }
   PriorityTaskFilter(taskPriority: number): void {
     if (taskPriority != undefined && taskPriority != 0) {
 
-  this._service.GetAllTask().subscribe(data => this.list = data.filter(item => item.Priority == taskPriority));
+  this._service.GetAllTask().subscribe(data => this.tasks = data.filter(item => item.Priority == taskPriority));
     } else {
-    this._service.GetAllTask().subscribe(data => this.list = data);
+    this._service.GetAllTask().subscribe(data => this.tasks = data);
   }
 
   }
-  StartDateTaskFilter(startdate: string): void {
-    if (startdate != undefined && startdate.length != 0) {
+  StartDateTaskFilter(StartDate: string): void {
+    if (StartDate != undefined && StartDate.length != 0) {
 
-  this._service.GetAllTask().subscribe(data => this.list = data.filter(item => this.datepipe.transform(item.StartDate, 'yyyy-MM-dd') == this.datepipe.transform(startdate, 'yyyy-MM-dd')));
+  this._service.GetAllTask().subscribe(data => this.tasks = data.filter(item => this.datepipe.transform(item.StartDate, 'yyyy-MM-dd') == this.datepipe.transform(StartDate, 'yyyy-MM-dd')));
     } else {
-  this._service.GetAllTask().subscribe(data => this.list = data);
+  this._service.GetAllTask().subscribe(data => this.tasks = data);
      }
   }
   EndDateTaskFilter(endDate: string): void {
     if (endDate != undefined && endDate.length != 0) {
-  this._service.GetAllTask().subscribe(data => this.list = data.filter(item => this.datepipe.transform(item.EndDate, 'yyyy-MM-dd') == this.datepipe.transform(endDate, 'yyyy-MM-dd')));
+  this._service.GetAllTask().subscribe(data => this.tasks = data.filter(item => this.datepipe.transform(item.EndDate, 'yyyy-MM-dd') == this.datepipe.transform(endDate, 'yyyy-MM-dd')));
     } else {
-    this._service.GetAllTask().subscribe(data => this.list = data);
+    this._service.GetAllTask().subscribe(data => this.tasks = data);
     }
   }
 }
